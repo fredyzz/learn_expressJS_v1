@@ -1,5 +1,25 @@
 # learn_expressJS_v1
 
+## Commands
+
+To start DDBB docker container:
+
+```bash
+docker start postgresql-test
+```
+
+To start server:
+
+```bash
+npm run dev
+```
+
+To start server in watch mode, to restart on any code change:
+
+```bash
+npm run dev:watch
+```
+
 ## How to run Postgres DDBB localy with docker
 
 ```bash
