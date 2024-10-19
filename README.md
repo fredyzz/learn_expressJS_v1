@@ -1,6 +1,6 @@
 # learn_expressJS_v1
 
-## Run Postgres DDBB localy with docker
+## How to run Postgres DDBB localy with docker
 
 ```bash
 docker run --name postgresql-test \
@@ -14,3 +14,9 @@ docker run --name postgresql-test \
 
   **This should be the connection string:**
   postgresql://myuser:mypassword@localhost:5432/mydatabase
+
+## How to execute a Prisma DDBB migration
+
+```bash
+npx prisma migrate dev --name init
+```
