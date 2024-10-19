@@ -44,3 +44,5 @@ npx prisma migrate dev --name init
 ## Used in this project
 
 [Morgan](https://github.com/expressjs/morgan) -  HTTP request logger middleware for node.js
+
+[Prisma](https://github.com/prisma/prisma) - ORM
