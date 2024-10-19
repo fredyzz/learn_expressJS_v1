@@ -40,3 +40,7 @@ docker run --name postgresql-test \
 ```bash
 npx prisma migrate dev --name init
 ```
+
+## Used in this project
+
+[Morgan](https://github.com/expressjs/morgan) -  HTTP request logger middleware for node.js
