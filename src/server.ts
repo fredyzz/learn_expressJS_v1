@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import customLogger from "./middlewares/customLogger";
+import { protectMiddleware } from "./modules/auth";
 
 const app = express();
 
@@ -21,6 +22,6 @@ app.get("/", (req, res) => {
   res.json({ message: "Hello World!" });
 });
 
-app.use("/api", router);
+app.use("/api", protectMiddleware, router);
 
 export default app;
