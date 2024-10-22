@@ -5,6 +5,7 @@ import cors from 'cors';
 
 import customLogger from "./middlewares/customLogger";
 import { protectMiddleware } from "./modules/auth";
+import { createNewUser, signin } from "./handlers/user";
 
 const app = express();
 
@@ -23,5 +24,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", protectMiddleware, router);
+
+app.post('/user', createNewUser)
+app.post('/signin', signin)
 
 export default app;
