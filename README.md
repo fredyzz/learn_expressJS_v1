@@ -47,8 +47,14 @@ npx prisma migrate dev --name init
 npx prisma studio
 ```
 
+## Testing the APIs
+
+A ThunderClient collection is included in the repository, it can be imported and used in the VSCODE ThunderClient extension.
+
 ## Used in this project
 
 [Morgan](https://github.com/expressjs/morgan) -  HTTP request logger middleware for node.js
 
-[Prisma](https://github.com/prisma/prisma) - ORM
+[Prisma](https://github.com/prisma/prisma) - ORM.
+
+[Express validator](https://www.npmjs.com/package/express-validator) - Validation tool for handlers
