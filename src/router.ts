@@ -1,6 +1,8 @@
 import { Router } from 'express'
-import { body, oneOf, validationResult } from 'express-validator';
+import { body} from 'express-validator';
 import { inputErrorsHandler } from './middlewares/errorInputHandler';
+import { createProduct, getOneProduct, getProducts, updateProduct } from './handlers/product';
+import { create } from 'domain';
 
 const router = Router();
 
@@ -8,17 +10,10 @@ const router = Router();
  *  Products
  */
 
-router.get('/product', (req, res) => {
-    res.json({ message: 'Hello! Products GET' });
-})
-router.get('/product/:id', (req, res) => {})
-
-router.put('/product/:id', body('name').isString(), inputErrorsHandler, (req, res) => {
- 
-})
-
-router.post('/product', body('name').isString(), inputErrorsHandler, (req, res) => {})
-
+router.get('/product', getProducts)
+router.get('/product/:id',getOneProduct)
+router.put('/product/:id', body('name').isString(), inputErrorsHandler, updateProduct)
+router.post('/product', body('name').isString(), inputErrorsHandler, createProduct)
 router.delete('/product/:id', (req, res) => {})
 
 /**
