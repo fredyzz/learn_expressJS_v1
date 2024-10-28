@@ -29,22 +29,26 @@ export const getOneProduct = async (req, res) => {
 };
 
 // Create
-export const createProduct = async (req, res) => {
-  const { name, price } = req.body;
+export const createProduct = async (req, res, next) => {
+  try {
+    const { name, price } = req.body;
 
-
-  // Name is required, price is optional
-  const data = {
-    name,
-    ...(price ? { price } : {}),
-    belongsToId: req.user.id,
-  };
-
-  const product = await prisma.product.create({
-    data,
-  });
-
-  res.json({data: product});
+    // Name is required, price is optional
+    const data = {
+      name,
+      ...(price ? { price } : {}),
+      belongsToId: req.user.id,
+    };
+  
+    const product = await prisma.product.create({
+      data,
+    });
+  
+    res.json({data: product});
+  } catch (e) {
+    next(e)
+  }
+ 
 }
 
 // Update

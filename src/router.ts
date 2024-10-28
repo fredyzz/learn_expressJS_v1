@@ -68,4 +68,15 @@ router.post('/updatepoint',
 
 router.delete('/updatepoint/:id', (req, res) => {})
 
+// Error handling middleware
+router.use((err, req, res, next) => {
+    if(err.type === 'auth') {
+      return res.status(401).json({ message: 'Unauthorized' });
+    } else if(err.type === 'input') {
+      return res.status(400).json({ message: 'Invalid input' });
+    } else {
+      res.status(500).json({ message: "Something went wrong" });
+    }
+  })
+
 export default router;
