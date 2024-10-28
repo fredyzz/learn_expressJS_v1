@@ -42,37 +42,65 @@ export const createUpdate = async (req, res) => {
     res.json({ data: update });
 };
 
-// // Update
-// export const updateUpdate = async (req, res) => {
-//   const productId = req.params.id;
-//   const { name, price } = req.body;
+// Update
+export const updateUpdate = async (req, res) => {
+  const updateId = req.params.id;
+  const products = await prisma.product.findMany({
+    where: {
+      belongsToId: req.user.id,
+    },
+    include: {
+      updates: true,
+    }
+  });
 
-//   const data = {
-//     ...(name ? { name } : {}),
-//     ...(price ? { price } : {}),
-//   };
+  const updates = products.reduce((acc, product) => {
+    return [...acc, ...product.updates];
+  }, [])
 
-//   const updatedProduct = await prisma.product.update({
-//     where: {
-//       id: productId,
-//       belongsToId: req.user.id,
-//     },
-//     data,
-//   });
+  const match =  updates.find((update) => update.id === updateId);
 
-//   res.json({ data: updatedProduct });
-// };
+  if (!match) {
+    return res.status(404).json({ message: "Update not found" });
+  }
 
-// // Delete
-// export const deleteUpdate = async (req, res) => {
-//   const productId = req.params.id;
+  const updatedUpdate = await prisma.update.update({
+    where: {
+      id: updateId,
+    },
+    data: req.body,
+  });
 
-//   const deletedProduct = await prisma.product.delete({
-//     where: {
-//       id: productId,
-//       belongsToId: req.user.id,
-//     },
-//   });
+  res.json({ data: updatedUpdate });
+};
 
-//   res.json({ data: deletedProduct });
-// };
+// Delete
+export const deleteUpdate = async (req, res) => {
+  const updateId = req.params.id;
+  const products = await prisma.product.findMany({
+    where: {
+      belongsToId: req.user.id,
+    },
+    include: {
+      updates: true,
+    }
+  });
+
+  const updates = products.reduce((acc, product) => {
+    return [...acc, ...product.updates];
+  }, [])
+
+  const match =  updates.find((update) => update.id === updateId);
+
+  if (!match) {
+    return res.status(404).json({ message: "Update not found" });
+  }
+
+  const deletedUpdate = await prisma.update.delete({
+    where: {
+      id: updateId,
+    },
+  });
+
+  res.json({ data: deletedUpdate });
+};

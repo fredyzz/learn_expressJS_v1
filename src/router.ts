@@ -3,7 +3,7 @@ import { body} from 'express-validator';
 import { inputErrorsHandler } from './middlewares/errorInputHandler';
 import { createProduct, deleteProduct, getOneProduct, getProducts, updateProduct } from './handlers/product';
 import { create } from 'domain';
-import { createUpdate } from './handlers/update';
+import { createUpdate, deleteUpdate, getUpdates, updateUpdate } from './handlers/update';
 
 const router = Router();
 
@@ -12,19 +12,23 @@ const router = Router();
  */
 
 router.get('/product', getProducts)
+
 router.get('/product/:id',getOneProduct)
+
 router.put('/product/:id',
     body('name').isString(),
     body('price').isFloat().optional(),
     inputErrorsHandler, updateProduct)
 router.post('/product', body('name').isString(), inputErrorsHandler, createProduct)
+
 router.delete('/product/:id', deleteProduct)
 
 /**
  *  Update
  */
 
-router.get('/update/:productId', (req, res) => {})
+router.get('/update/:productId', getUpdates)
+
 router.post('/update',
     body('title').exists().isString(),
     body('body').exists().isString(),
@@ -32,25 +36,15 @@ router.post('/update',
     inputErrorsHandler,
     createUpdate
 )
-
-router.put('/update/:id',
+router.put('/update/:productId',
     body('title').optional(),
     body('body').optional(),
     body('status').isIn(['IN_PROGRESS', 'SHIPPED', 'DEPRECATED']).optional(),
     body('version').optional(),
-    body('productId').optional(),
     inputErrorsHandler,
-    (req, res) => {
+  updateUpdate)
 
-})
-
-router.post('/update',
-    body('title').exists().isString(),
-    body('body').exists().isString(),
-    body('productId').optional(),
-    inputErrorsHandler,
-    (req, res) => {})
-router.delete('/update/:id', (req, res) => {})
+router.delete('/update/:id', deleteUpdate)
 
 /**
  * Update point
