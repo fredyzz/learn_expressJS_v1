@@ -47,6 +47,12 @@ npx prisma migrate dev --name init
 npx prisma studio
 ```
 
+## Run jest configurator
+
+```bash
+npx ts-jest config:init
+```
+
 ## Testing the APIs
 
 A ThunderClient collection is included in the repository, it can be imported and used in the VSCODE ThunderClient extension.
@@ -58,3 +64,7 @@ A ThunderClient collection is included in the repository, it can be imported and
 [Prisma](https://github.com/prisma/prisma) - ORM.
 
 [Express validator](https://www.npmjs.com/package/express-validator) - Validation tool for handlers
+
+[Supertest](https://www.npmjs.com/package/supertest) - High-level abstraction for testing HTTP, while still allowing you to drop down to the lower-level API provided by superagent.
+
+[Jest](https://jestjs.io/) - JavaScript Testing Framework with a focus on simplicity.
