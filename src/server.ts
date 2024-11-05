@@ -27,6 +27,11 @@ app.get("/", (req, res, next) => {
   next(new Error("Something went wrong"));
 });
 
+app.get("/test", (req, res) => {
+  res.json({ message: "Test message!" });
+}
+);
+
 app.use("/api", protectMiddleware, router);
 
 app.post('/user', createNewUser)
