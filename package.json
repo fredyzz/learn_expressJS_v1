@@ -7,7 +7,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "dev": "ts-node src/index.ts",
-    "dev:watch": "nodemon src/index.ts"
+    "dev:watch": "nodemon src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
   },
   "author": "",
   "license": "ISC",
